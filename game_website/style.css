@@ -1,0 +1,64 @@
+.game_1, .game_2, .game_3 {
+    width: 500px; 
+    height: 1000px; 
+    margin: 20px; 
+    border-radius: 20px;
+    transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    position: relative; 
+}
+
+
+.game_1 {
+    background-color: rgba(221, 75, 57, 0.7); 
+    /* change 0.7 for opacity */
+}
+
+.game_2 {
+    background-color: rgba(221, 75, 57, 0.7); 
+}
+
+.game_3 {
+    background-color: rgba(221, 75, 57, 0.7); 
+}
+
+
+.game_1:hover, .game_2:hover, .game_3:hover {
+    transform: scale(1.05); 
+}
+
+
+body {
+    position: relative;
+    background-color: black; 
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    font-family: Arial, sans-serif;
+}
+
+/* Flex container to arrange boxes next to each other */
+.container {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: row; /* Align items in a row */
+}
+
+/* Overlay for background image */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0; /* Start with the overlay invisible */
+    transition: opacity 1s ease-in-out; /* Smooth transition for overlay opacity */
+    z-index: -1; /* Place the overlay behind other elements */
+}
+
+
+.overlay.fade-in {
+    opacity: 1; 
+}
