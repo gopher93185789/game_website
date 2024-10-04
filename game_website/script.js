@@ -12,10 +12,22 @@ const backgroundImages = [
 gameElements.forEach((gameElement, index) => {
   gameElement.addEventListener("mouseenter", () => {
     overlayElements[index].classList.add("fade-in");
+
+    // Blur the other game elements
+    gameElements.forEach((el, i) => {
+      if (i !== index) {
+        el.classList.add("blur");
+      }
+    });
   });
 
   gameElement.addEventListener("mouseleave", () => {
     overlayElements[index].classList.remove("fade-in");
+
+    // Remove blur from other game elements
+    gameElements.forEach((el) => {
+      el.classList.remove("blur");
+    });
   });
 
   // Set background image for each overlay
