@@ -23,7 +23,7 @@ body {
     border-radius: 20px;
     transition: transform 0.5s ease-in-out;
     position: relative; 
-
+    border: 1px solid white; /* Add a white border */
     background-size: cover; /* Ensure the background image covers the entire area */
     background-position: center; /* Center the background image */
     overflow: hidden; /* Hide overflow to keep the zoom effect contained */
