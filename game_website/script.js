@@ -1,7 +1,7 @@
 // Select all game elements and overlay elements
 const gameElements = document.querySelectorAll(".game_1, .game_2, .game_3");
 const overlayElements = document.querySelectorAll(".overlay");
-const navbar = document.querySelector(".navbar")
+const navbar = document.querySelector(".navbar");
 
 // Video sources for the backgrounds
 const backgroundVideos = [
@@ -12,13 +12,24 @@ const backgroundVideos = [
 
 // Add mouseenter and mouseleave events for each game element
 gameElements.forEach((gameElement, index) => {
+  let video = null; // Declare the video element outside the event listeners
+
   gameElement.addEventListener("mouseenter", () => {
     overlayElements[index].classList.add("fade-in");
 
-    // navbar.classList.add("hidden")
+    // Lazy load the video on hover (if not already created)
+    if (!video) {
+      video = document.createElement("video");
+      video.src = backgroundVideos[index];
+      video.autoplay = true;
+      video.loop = true;
+      video.muted = true;
+      overlayElements[index].appendChild(video);
+    }
+
     // Hide the other game elements
     gameElements.forEach((el, i) => {
-      if (i != index) {
+      if (i !== index) {
         el.classList.add("hidden");
       }
     });
@@ -26,23 +37,21 @@ gameElements.forEach((gameElement, index) => {
 
   gameElement.addEventListener("mouseleave", () => {
     overlayElements[index].classList.remove("fade-in");
-    // navbar.classList.remove("hidden");
+
+    // Optional: Remove the video when leaving to free up memory
+    if (video) {
+      video.remove(); // Remove the video element
+      video = null; // Reset the video variable for future hovers
+    }
+
     // Show the hidden game elements
     gameElements.forEach((el) => {
       el.classList.remove("hidden");
     });
   });
-
-  // Set video source for each overlay
-  const video = document.createElement("video");
-  video.src = backgroundVideos[index];
-  video.autoplay = true;
-  video.loop = true;
-  video.muted = true;
-  overlayElements[index].appendChild(video);
 });
 
-
+// Mouse-following circles
 const coords = { x: 0, y: 0 };
 const circles = document.querySelectorAll(".circle");
 
@@ -81,8 +90,6 @@ window.addEventListener("mousemove", function (e) {
   coords.x = e.clientX;
   coords.y = e.clientY;
 });
-
-
 
 function animateCircles() {
   let x = coords.x;
